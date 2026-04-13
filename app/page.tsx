@@ -197,7 +197,7 @@ export default function DashboardPage() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* ── Left sidebar ─────────────────────────────────────────────────── */}
-        <aside className="w-80 flex-shrink-0 flex flex-col overflow-y-auto border-r border-[#1e3448] bg-[#0d1b2a]">
+        <aside className="w-80 flex-shrink-0 flex flex-col overflow-y-auto border-r border-[#1e3448] bg-[#0d1b2a] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#1e3448] [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#2d4a68]">
           <FiltersPanel
             incidentTypes={incidentTypes}
             statusTypes={statusTypes}
