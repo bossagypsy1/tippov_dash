@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Leaflet overrides ─────────────────────────────────────────────────── */
+
+/* Remove default Leaflet popup chrome so our card styles take over */
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: 320px !important;
+  max-width: 320px !important;
+}
+
+.leaflet-popup-tip-container {
+  margin-top: -1px;
+}
+
+.leaflet-popup-close-button {
+  display: none !important;
+}
+
+/* Hide default Leaflet attribution (optional) */
+.leaflet-control-attribution {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* Animate marker pulse for selected */
+@keyframes markerPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(91, 53, 201, 0.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(91, 53, 201, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(91, 53, 201, 0); }
+}
+
+.marker-selected {
+  animation: markerPulse 1.5s ease-out infinite;
+}
+
+/* Custom scrollbar for sidebar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3448;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a4560;
+}
