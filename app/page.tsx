@@ -197,7 +197,7 @@ export default function DashboardPage() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* ── Left sidebar ─────────────────────────────────────────────────── */}
-        <aside className="w-80 flex-shrink-0 flex flex-col overflow-y-auto border-r border-[#1e3448] bg-[#0d1b2a] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#1e3448] [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#2d4a68]">
+        <aside className="w-72 flex-shrink-0 flex flex-col overflow-y-auto border-r border-[#1e3448] bg-[#0d1b2a] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-[#0a1420] [&::-webkit-scrollbar-thumb]:bg-[#2d4a68] [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#3d6088]">
           <FiltersPanel
             incidentTypes={incidentTypes}
             statusTypes={statusTypes}
@@ -208,7 +208,7 @@ export default function DashboardPage() {
             onReset={handleReset}
           />
 
-          {selectedIncident && (
+          {selectedIncident ? (
             <SidebarIncidentCard
               incident={selectedIncident}
               statusTypes={statusTypes}
@@ -218,6 +218,23 @@ export default function DashboardPage() {
               photoUrl={photoUrl}
               isPhotoLoading={isPhotoLoading}
             />
+          ) : (
+            <div className="px-3 pb-4 pt-3">
+              <div className="rounded-xl bg-[#0f2337] border border-[#1e3448] overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-[#1e3448]">
+                  <div className="w-1.5 h-4 rounded-full bg-indigo-500" />
+                  <h3 className="text-sm font-semibold text-white">Incident Details</h3>
+                </div>
+                <div className="flex flex-col items-center justify-center py-10 px-4 text-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1e3448] flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      <path d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <p className="text-slate-500 text-xs leading-relaxed">Click a marker on the map to view incident details here</p>
+                </div>
+              </div>
+            </div>
           )}
         </aside>
 
