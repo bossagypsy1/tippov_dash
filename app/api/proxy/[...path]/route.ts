@@ -35,17 +35,22 @@ async function handler(
     return new NextResponse(null, { status: 204 });
   }
 
+  const bodyText = await upstream.text();
   const contentType = upstream.headers.get("content-type") ?? "";
-  if (contentType.includes("application/json")) {
-    const data = await upstream.json();
-    return NextResponse.json(data, { status: upstream.status });
+
+  if (!bodyText) {
+    return new NextResponse(null, { status: upstream.status });
   }
 
-  const body = await upstream.text();
-  return new NextResponse(body, {
-    status: upstream.status,
-    headers: { "Content-Type": contentType },
-  });
+  try {
+    const data = JSON.parse(bodyText);
+    return NextResponse.json(data, { status: upstream.status });
+  } catch {
+    return new NextResponse(bodyText, {
+      status: upstream.status,
+      headers: { "Content-Type": contentType || "text/plain" },
+    });
+  }
 }
 
 export const GET     = handler;

@@ -15,11 +15,20 @@ import type {
 // The proxy route (app/api/proxy/[...path]/route.ts) forwards them server-side.
 const BASE_URL = "/api/proxy";
 
+// ─── Module-level auth token ─────────────────────────────────────────────────
+// Set by auth-context after login so all API calls are automatically authenticated.
+
+let _authToken: string | null = null;
+export function setAuthToken(token: string | null) {
+  _authToken = token;
+}
+
 // ─── HTTP helpers ────────────────────────────────────────────────────────────
 
 function getAuthHeaders(token?: string): Record<string, string> {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (token) headers["Authorization"] = `Bearer ${token}`;
+  const t = token ?? _authToken;
+  if (t) headers["Authorization"] = `Bearer ${t}`;
   return headers;
 }
 

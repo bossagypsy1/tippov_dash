@@ -11,10 +11,15 @@ export interface Filters {
   dateTo: string;
 }
 
+export interface TenantOption {
+  id: string;
+  name: string;
+}
+
 interface FiltersPanelProps {
   incidentTypes: IncidentType[];
   statusTypes: StatusType[];
-  tenants: string[];
+  tenants: TenantOption[];
   filters: Filters;
   onFiltersChange: (f: Filters) => void;
   onApplyFilters: () => void;
@@ -87,7 +92,7 @@ export default function FiltersPanel({
 
       <SelectField label="Tenant" value={filters.tenant} onChange={(v) => set("tenant", v)}>
         <option value="">All Tenants</option>
-        {tenants.map((t) => <option key={t} value={t}>{t}</option>)}
+        {tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
       </SelectField>
 
       <SelectField label="Incident Type" value={filters.incidentTypeId} onChange={(v) => set("incidentTypeId", v === "" ? "" : Number(v))}>
